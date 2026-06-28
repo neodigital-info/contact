@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NIKTELL | لینک‌های رسمی</title>
+    <title>NEO DIGITAL | لینک‌های رسمی</title>
     <style>
       @font-face {
         font-family: "Yekan Bakh";
@@ -68,15 +68,37 @@
         font-weight: 950;
         font-style: normal;
       }
-      /* استفاده از فونت Peyda با وزن 700 (پررنگ) */
-      /* پالت رنگی جدید بر اساس #879a7c */
+
+      /* ===================================================================
+         پالت رنگی جدید — برگرفته از لوگوی Neo Digital (سرمه‌ای + خاکستری روشن)
+         =================================================================== */
       :root {
-        --primary: #879a7c; /* رنگ پایه */
-        --primary-dark: #6b7d61; /* ۲۰% تیره‌تر */
-        --primary-light: #a4b398; /* ۲۰% روشن‌تر */
-        --accent: #c4d0b5; /* رنگ مکمل */
-        --text: #2d3029; /* متن اصلی */
-        --background: #f5f7f2; /* پس‌زمینه */
+        --navy: #11114f;        /* رنگ پایه برند، برگرفته از خط‌های لوگو */
+        --navy-dark: #0a0a32;   /* تیره‌تر، برای حالت hover/active */
+        --navy-light: #4d4d86;  /* روشن‌تر، برای متن ثانویه */
+        --navy-soft: #e9e9f1;   /* تینت ملایم سرمه‌ای، برای پس‌زمینه‌های نرم */
+        --navy-border: #d3d3e3;/* بردر ملایم */
+        --text: #1c1c2e;        /* متن اصلی */
+        --background: #ececea; /* پس‌زمینه صفحه، هم‌خانواده با پس‌زمینه لوگو */
+        --card: #ffffff;        /* پس‌زمینه کارت (fallback بدون blur) */
+
+        /* --- متریال شیشه‌ی مایع (Liquid Glass) --- */
+        --glass-fill: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.62),
+          rgba(255, 255, 255, 0.28)
+        );
+        --glass-border: rgba(255, 255, 255, 0.55);
+        --glass-shadow: 0 12px 40px rgba(17, 17, 79, 0.18);
+        --glass-shine-top: inset 0 1px 1px rgba(255, 255, 255, 0.95);
+        --glass-shine-bottom: inset 0 -10px 20px rgba(17, 17, 79, 0.05);
+        --blur: blur(22px) saturate(180%);
+
+        /* رنگ‌های ابرهای پس‌زمینه که از پشت شیشه دیده می‌شوند */
+        --orb-1: #3b3fa1; /* بنفش-سرمه‌ای */
+        --orb-2: #5fb8e8; /* آبی یخی */
+        --orb-3: #8d6fd1; /* بنفش روشن */
+        --orb-4: #3fb6a8; /* فیروزه‌ای ملایم */
       }
 
       /* Reset Styles */
@@ -88,24 +110,89 @@
       }
 
       /* Background & Global Styles */
+      html {
+        background: var(--background);
+      }
+
       body {
         font-family: "Yekan Bakh", Tahoma, sans-serif;
         font-weight: 400;
-        background: var(--background);
+        background: transparent;
         color: var(--text);
         min-height: 100vh;
-        padding: 0.6rem;
         line-height: 1.6;
-        background-color: #f5f7f2;
+        padding: 0.6rem;
+        overflow-x: hidden;
       }
 
-      /* Container */
-      /*.container {
-        max-width: 600px;
-        margin: 0 auto;
-        text-align: center;
+      /* ابرهای رنگی شناور پس‌زمینه — بستری برای جلوه‌ی شیشه‌ی مایع */
+      .bg-orbs {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
       }
-      */  
+
+      .bg-orbs span {
+        position: absolute;
+        display: block;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.55;
+        will-change: transform;
+      }
+
+      .orb-1 {
+        width: 46vmax;
+        height: 46vmax;
+        top: -18vmax;
+        right: -14vmax;
+        background: radial-gradient(circle, var(--orb-1), transparent 70%);
+        animation: drift1 26s ease-in-out infinite;
+      }
+      .orb-2 {
+        width: 38vmax;
+        height: 38vmax;
+        bottom: -16vmax;
+        left: -12vmax;
+        background: radial-gradient(circle, var(--orb-2), transparent 70%);
+        animation: drift2 32s ease-in-out infinite;
+      }
+      .orb-3 {
+        width: 30vmax;
+        height: 30vmax;
+        top: 28vh;
+        left: 50%;
+        background: radial-gradient(circle, var(--orb-3), transparent 70%);
+        animation: drift3 22s ease-in-out infinite;
+      }
+      .orb-4 {
+        width: 26vmax;
+        height: 26vmax;
+        bottom: 8vh;
+        right: -6vmax;
+        background: radial-gradient(circle, var(--orb-4), transparent 70%);
+        animation: drift1 30s ease-in-out infinite reverse;
+      }
+
+      @keyframes drift1 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(-6%, 5%) scale(1.08); }
+      }
+      @keyframes drift2 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(5%, -6%) scale(1.1); }
+      }
+      @keyframes drift3 {
+        0%, 100% { transform: translate(-50%, 0) scale(1); }
+        50% { transform: translate(-46%, 4%) scale(0.95); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .bg-orbs span { animation: none; }
+      }
+
       .container {
         max-width: 600px;
         margin: 0 auto;
@@ -113,251 +200,295 @@
         padding: 0 0.6rem; /* جلوگیری از چسبیدن به لبه در موبایل */
       }
 
-      /*.logo {
-        width: 300px; 
-        height: auto;
-        margin-bottom: 1rem;
+      /* ===================================================================
+         پروفایل شرکت
+         =================================================================== */
+      .profile {
+        position: relative;
+        margin: 2rem 0;
+        padding: 2rem 1.5rem 1.7rem;
+        background: var(--glass-fill);
+        -webkit-backdrop-filter: var(--blur);
+        backdrop-filter: var(--blur);
+        border-radius: 28px;
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow), var(--glass-shine-top), var(--glass-shine-bottom);
+        overflow: hidden;
+      }
+
+      /* خط درخشش روی لبه‌ی شیشه — حس برخورد نور با سطح منحنی */
+      .profile::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.65) 0%,
+          rgba(255, 255, 255, 0.12) 28%,
+          rgba(255, 255, 255, 0) 45%
+        );
+        pointer-events: none;
+      }
+
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .profile {
+          background: rgba(255, 255, 255, 0.92);
+        }
+      }
+
+      /* -------------------------------------------------------------------
+         نشان Neo Digital — قاب براکت + حرف N + نام برند
+         ------------------------------------------------------------------- */
+      .brand-mark {
+        direction: ltr;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto 1.1rem;
+      }
+
+      .logo-frame-wrap {
+        position: relative;
+        width: 38%;
+        max-width: 130px;
+        min-width: 96px;
+        aspect-ratio: 1 / 1;
         margin: 0 auto;
       }
-      */
 
-      .logo {
-        width: 90%; /* تغییر از 300px به درصد */
-        max-width: 400px; /* جلوگیری از بزرگ شدن بیش از حد */
-        height: auto;
-        margin: 0 auto 0.6rem; /* مرکزسازی افقی */
+      .logo-frame-wrap svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        filter: drop-shadow(0 3px 8px rgba(17, 17, 79, 0.25));
       }
 
-      .logo svg {
-        width: 100%; /* پر کردن کامل عرض والد */
-        height: auto; /* حفظ نسبت ابعاد */
-      }
-      /* پروفایل شرکت */
-      .profile {
-        margin: 2rem 0;
-        padding: 1.5rem;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      .brand-word {
+        margin-top: 0.9rem;
+        font-family: Georgia, "Times New Roman", "Noto Serif", serif;
+        font-weight: 700;
+        font-size: 1.35rem;
+        letter-spacing: 0.18em;
+        white-space: nowrap;
+        color: var(--navy);
       }
 
-      .profile-img {
-        display: none;
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 3px solid var(--primary);
-        margin-bottom: 1rem;
-        object-fit: cover;
+      .brand-tagline {
+        margin-top: 0.35rem;
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 0.62rem;
+        font-weight: 400;
+        letter-spacing: 0.26em;
+        white-space: nowrap;
+        color: var(--navy-light);
       }
 
       .profile h1 {
-        color: var(--primary-dark);
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
+        margin-top: 1.3rem;
+        color: var(--navy);
+        font-size: 1.5rem;
+        margin-bottom: 0.4rem;
         font-weight: 800;
       }
 
       .profile p {
-        color: var(--primary);
+        color: var(--navy-light);
         font-size: 0.95rem;
-        max-width: 80%;
+        max-width: 85%;
         margin: 0 auto;
       }
 
       .links {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 2rem;
-      }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
 
       .link-btn {
-        background: var(--primary);
-        color: white;
+        display: flex;
+        flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 0.6rem;
+text-align: center;
+
+        position: relative;
+        background: var(--glass-fill);
+        -webkit-backdrop-filter: var(--blur);
+        backdrop-filter: var(--blur);
+        color: var(--navy);
         padding: 1.2rem;
-        border-radius: 12px;
+        border-radius: 24px;
         text-decoration: none;
-        border: 2px solid var(--primary-dark);
-        transition: all 0.3s ease;
+        min-height: 90px;
+        border: 1px solid var(--glass-border);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        
+        
+        
+        gap: 0.9rem;
+        font-weight: 600;
+        box-shadow: 0 6px 18px rgba(17, 17, 79, 0.10), var(--glass-shine-top);
+        overflow: hidden;
+      }
+
+      .link-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.55) 0%,
+          rgba(255, 255, 255, 0.08) 30%,
+          rgba(255, 255, 255, 0) 48%
+        );
+        pointer-events: none;
+      }
+
+      .icon-badge {
+        position: relative;
+        flex-shrink: 0;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: rgba(17, 17, 79, 0.7);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.55),
+          inset 0 -3px 6px rgba(0, 0, 0, 0.25);
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0.8rem;
-        font-weight: 600;
-      }
-
-      .link-btn:hover {
-        transform: translateY(-3px);
-        background: var(--primary-dark);
-        box-shadow: 0 6px 15px rgba(135, 154, 124, 0.25);
+        transition: background 0.25s ease, transform 0.25s ease;
       }
 
       .icon {
         width: 24px;
         height: 24px;
         filter: brightness(0) invert(1);
+        position: relative;
+        z-index: 1;
+      }
+
+      .link-btn:hover,
+      .link-btn:focus-visible {
+        transform: translateY(-3px);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.78),
+          rgba(255, 255, 255, 0.38)
+        );
+        box-shadow: 0 14px 28px rgba(17, 17, 79, 0.18), var(--glass-shine-top);
+      }
+
+      .link-btn:active {
+        transform: translateY(-1px) scale(0.985);
+      }
+
+      .link-btn:hover .icon-badge {
+        background: rgba(10, 10, 50, 0.85);
+        transform: scale(1.06);
+      }
+
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .link-btn {
+          background: rgba(255, 255, 255, 0.9);
+        }
       }
 
       .bio-placeholder {
-        background: var(--accent);
-        border-radius: 12px;
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.45),
+          rgba(233, 233, 241, 0.35)
+        );
+        -webkit-backdrop-filter: blur(14px) saturate(160%);
+        backdrop-filter: blur(14px) saturate(160%);
+        border-radius: 18px;
         padding: 1.5rem;
-        margin: 2rem 0;
+        margin: 1.6rem 0 0;
         color: var(--text);
         font-size: 0.95rem;
-        border: 1px solid var(--primary-light);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shine-top);
       }
 
-      .under-construction {
-        position: relative;
+      .bio-placeholder strong {
+        color: var(--navy);
       }
 
-      .under-construction .hover-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: none;
-        color: #000 !important;
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .bio-placeholder {
+          background: rgba(236, 236, 242, 0.92);
+        }
       }
 
-      .under-construction:hover .original-text {
-        opacity: 0;
-      }
-
-      .under-construction:hover .hover-text {
-        display: block;
-      }
-
-      .link-btn.under-construction:hover {
-        background: #808080 !important;
-        border-color: #666 !important;
-      }
-      .link-btn:not(.under-construction):hover {
-        transform: translateY(-3px);
-        background: var(--primary-dark);
-        box-shadow: 0 6px 15px rgba(135, 154, 124, 0.25);
-      }
+      @media (max-width: 500px) {
+    .links {
+        grid-template-columns: 1fr;
+    }
+}
     </style>
   </head>
   <body>
+    <div class="bg-orbs" aria-hidden="true">
+      <span class="orb-1"></span>
+      <span class="orb-2"></span>
+      <span class="orb-3"></span>
+      <span class="orb-4"></span>
+    </div>
     <div class="container">
       <!-- پروفایل شرکت -->
       <div class="profile">
-        <img src="picture.jpg" alt="لوگو نیکتل" class="profile-img" />
-        <div class="logo">
-          <svg
-            id="Layer_2"
-            data-name="Layer 2"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 473.46 202.07"
-          >
-            <defs>
-              <style>
-                .cls-1 {
-                  fill: #7d7c7c;
-                }
-
-                .cls-1,
-                .cls-2 {
-                  stroke-width: 0px;
-                }
-
-                .cls-2 {
-                  fill: #3f5e5a;
-                }
-              </style>
-            </defs>
-            <g id="Layer_1-2" data-name="Layer 1">
-              <path
-                class="cls-1"
-                d="m447.34,26.34c1.3-.05,2.6,0,3.91,0,0-2.71,0-5.42,0-8.13,0-11.22-6.95-18.19-18.14-18.21-14.06-.02-28.12-.02-42.18.01-1.73,0-3.5.07-5.17.46-7.98,1.88-12.98,8.52-12.99,17.23,0,2.86,0,5.71,0,8.57.15,0,.29,0,.44,0,1.14,0,2.29.02,3.43.02v-.02h70.71v.04Zm-22.47-13.21c-.16.71-1.43,1.64-2.24,1.68-3.62.18-7.24.08-10.87.08s-6.94.11-10.4-.08c-.81-.04-2.08-.96-2.24-1.68-.32-1.45.87-1.99,2.24-1.99,7.09,0,14.18,0,21.27,0,1.37,0,2.55.54,2.23,1.99Z"
-              />
-              <path
-                class="cls-1"
-                d="m447.18,149.77h0s-70.31,0-70.31,0h0s-3.85,0-3.85,0c0,2.66,0,5.33,0,7.99,0,11.14,6.91,18.09,18.03,18.11,13.98.02,27.96.02,41.94,0,11.12-.02,18.06-6.96,18.06-18.08,0-2.67,0-5.34,0-8.01h-3.88Zm-35.21,18.71c-2.99-.05-5.52-2.61-5.51-5.58.01-2.97,2.56-5.53,5.54-5.54,2.98-.02,5.55,2.47,5.62,5.46.08,3.03-2.6,5.72-5.65,5.66Z"
-              />
-              <path
-                class="cls-2"
-                d="m81.87,149.82h-20.63L23.69,77.84v71.98H.03V26.32h20.63l37.55,71.98V26.32h23.66v123.5Z"
-              />
-              <path
-                class="cls-2"
-                d="m113.85,149.82h-22.28V60.37h22.28v89.45Z"
-              />
-              <path
-                class="cls-2"
-                d="m113.85,49.48h-22.28v-23.18h22.28v23.18Z"
-              />
-              <path
-                class="cls-2"
-                d="m205.88,149.82h-27.51l-30.54-56.46v56.46h-23.52V26.32h23.52v54.87l29.44-54.87h26.27l-33.29,59.81,35.63,63.69Z"
-              />
-              <path
-                class="cls-2"
-                d="m251.38,149.82h-23.62V44.23h-22.66v-17.94h68.94v17.94h-22.66v105.59Z"
-              />
-              <path
-                class="cls-2"
-                d="m344.75,149.82h-65.38V26.32h65.67v28.58h-42.15v19.05h31.36v26.99h-31.36v20.47h41.85v28.41Z"
-              />
-              <path
-                class="cls-2"
-                d="m373.09,149.82h-22.42V26.32h22.42v123.5Z"
-              />
-              <path
-                class="cls-2"
-                d="m473.46,149.82h-22.42V26.32h22.42v123.5Z"
-              />
-              <g>
-                <path
-                  class="cls-1"
-                  d="m283.8,195.68c-1.63,0-2.95,1.32-2.95,2.95s1.32,2.95,2.95,2.95,2.95-1.32,2.95-2.95-1.32-2.95-2.95-2.95Z"
-                />
-                <circle class="cls-1" cx="261" cy="198.63" r="2.95" />
-                <circle class="cls-1" cx="252.66" cy="198.63" r="2.95" />
-                <circle class="cls-1" cx="160.69" cy="198.63" r="2.95" />
-                <circle class="cls-1" cx="173.45" cy="161.31" r="2.95" />
-                <circle class="cls-1" cx="152.35" cy="198.63" r="2.95" />
-                <circle class="cls-1" cx="97.08" cy="162.1" r="2.95" />
-                <circle class="cls-1" cx="88.73" cy="162.1" r="2.95" />
-                <path
-                  class="cls-1"
-                  d="m173.97,169.78h-1.35c-1.1,0-2,.9-2,2v13.43h-11.65v-13.43c0-1.1-.9-2-2-2h-1.35c-1.1,0-2,.9-2,2v13.43h-12.24v-5.79c0-2.85-2.24-5.16-5.05-5.32v-.03h-26.69c.13-.28.26-.55.42-.81,3.2-6.6,9.09-6.58,15.24-5.9v-5.27c-14.2-1.67-22.88,6.57-21,17.31h.4v.03h31.32v5.79h-41.24v-13.39c0-1.1-.9-2-2-2h-1.35c-1.1,0-2,.9-2,2v13.39h-11.3v-21.84c0-1.1-.9-2-2-2h-1.35c-1.1,0-2,.9-2,2v21.84H2c-1.1,0-2,.9-2,2v1.35c0,1.1.9,2,2,2h168.77v-.04c2.88-.09,5.2-2.44,5.2-5.34v-13.41c0-1.1-.9-2-2-2Z"
-                />
-                <path
-                  class="cls-1"
-                  d="m263.49,169.81h-1.35c-1.1,0-2,.9-2,2v13.4h-18.09v-21.84c0-1.1-.9-2-2-2h-1.35c-1.1,0-2,.9-2,2v21.84h-42.74c-1.1,0-2,.9-2,2v1.35c0,1.1.9,2,2,2h66.18s.06,0,.1,0h.19v-.02c2.82-.15,5.07-2.47,5.07-5.33v-13.41c0-1.1-.9-2-2-2Z"
-                />
-                <path
-                  class="cls-1"
-                  d="m287.59,169.79h-1.35c-1.1,0-2,.9-2,2v13.41h-8.72s0,0-.01,0v-21.2c0-1.1-.9-2-2-2h-1.35c-1.1,0-2,.9-2,2v21.2c0,2.96,2.4,5.35,5.35,5.35h0s0,0,.01,0h8.72s0,0,0,0c2.96,0,5.35-2.4,5.35-5.35v-13.41c0-1.1-.9-2-2-2Z"
-                />
-                <path
-                  class="cls-1"
-                  d="m340.68,169.79h-1.35s-9.44,0-9.44,0h-1.35c-2.21,0-4,1.79-4,4v11.41h-8.41v-11.42c0-2.21-1.79-4-4-4h-1.35s-9.31,0-9.31,0h0s-1.35,0-1.35,0c-2.21,0-4,1.79-4,4v12.77c0,2.21,1.79,4,4,4h1.18s.24,0,.24,0h8.68s-.04.08-.06.12c-3.2,6.6-9.09,6.58-15.24,5.9v5.27c11.39,1.34,19.23-3.7,20.91-11.29h12.68s.03,0,.05,0h1.35s10.23,0,10.23,0h0s.56,0,.56,0c2.21,0,4-1.79,4-4v-12.77c0-2.21-1.79-4-4-4Zm-39.23,15.42v-10.05h9.31v10.05h-9.31Zm28.43-10.05h9.44v10.05h-9.44v-10.05Z"
-                />
-              </g>
-            </g>
-          </svg>
+        <!-- نشان Neo Digital -->
+        <div class="brand-mark">
+          <div class="logo-frame-wrap">
+<?xml version="1.0" standalone="no"?> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"> <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="1293.000000pt" height="1254.000000pt" viewBox="0 0 1293.000000 1254.000000" preserveAspectRatio="xMidYMid meet"> <g transform="translate(0.000000,1254.000000) scale(0.100000,-0.100000)" fill="#060955" stroke="none"> <path d="M1196 11631 c-7 -11 -8 -5102 -2 -5109 3 -2 71 -4 151 -4 101 0 150 3 160 12 13 11 15 293 15 2388 0 1307 3 2379 8 2384 4 4 2244 7 4978 6 l4969 -3 0 -4950 0 -4950 -2507 -3 c-2375 -2 -2508 -3 -2517 -20 -5 -9 -8 -82 -7 -162 l1 -145 2683 -3 2682 -2 0 5279 c0 4804 -1 5279 -16 5285 -26 10 -10592 7 -10598 -3z"/> <path d="M7815 8250 l-620 -5 0 -45 0 -45 130 -6 c142 -7 191 -20 261 -71 74 -53 100 -112 114 -258 5 -52 9 -592 10 -1200 0 -914 -2 -1105 -13 -1108 -7 -1 -27 17 -45 41 -17 24 -44 59 -60 78 -52 60 -246 295 -277 335 -16 21 -44 54 -60 74 -17 19 -46 55 -65 80 -19 25 -40 50 -46 55 -7 6 -60 71 -120 145 -59 74 -115 144 -125 155 -18 20 -192 231 -259 314 -82 102 -167 207 -200 246 -19 23 -60 73 -90 110 -30 37 -71 87 -90 110 -65 78 -108 130 -210 255 -55 69 -111 136 -123 150 -13 14 -38 45 -57 70 -19 25 -44 56 -57 70 -12 14 -60 72 -108 130 -47 58 -103 125 -123 150 -21 25 -59 73 -86 108 l-47 62 -507 -2 -507 -3 0 -45 0 -45 100 -7 c61 -4 123 -14 160 -28 33 -11 74 -25 92 -31 18 -5 35 -14 38 -19 4 -6 13 -10 21 -10 40 0 297 -244 309 -293 3 -12 4 -656 3 -1432 -3 -1334 -4 -1413 -22 -1466 -10 -31 -32 -71 -49 -90 -36 -38 -91 -79 -107 -79 -6 0 -21 -7 -35 -16 -17 -11 -63 -17 -162 -22 l-138 -7 -3 -39 c-2 -21 1 -43 6 -48 13 -13 1261 -13 1274 0 5 5 8 27 6 48 l-3 39 -70 1 c-98 0 -192 13 -245 32 -71 25 -159 98 -160 133 0 9 -7 32 -15 52 -8 20 -19 99 -25 189 -13 198 -13 2388 0 2388 13 0 32 -20 100 -105 30 -38 62 -76 70 -84 8 -9 44 -52 79 -96 69 -86 111 -136 206 -249 33 -39 78 -93 100 -121 22 -27 48 -59 57 -70 44 -53 189 -229 243 -296 33 -41 65 -78 71 -84 5 -5 28 -32 49 -60 50 -63 76 -93 96 -114 8 -9 37 -45 64 -81 27 -36 54 -69 60 -75 7 -5 27 -30 45 -55 19 -25 41 -52 49 -61 24 -24 57 -63 150 -179 47 -58 130 -159 186 -226 55 -66 134 -163 175 -214 41 -51 91 -112 110 -135 19 -23 51 -61 70 -85 19 -24 53 -63 75 -88 22 -25 46 -54 54 -66 8 -12 17 -23 21 -26 3 -3 21 -25 40 -50 33 -43 170 -208 246 -297 34 -40 40 -43 77 -38 22 3 42 7 44 9 2 2 4 692 3 1532 0 1548 4 1782 36 1902 20 72 71 134 139 166 22 10 49 24 60 29 11 6 81 13 155 16 l135 6 0 44 c0 35 -4 45 -20 50 -11 3 -299 4 -640 1z"/> </g> </svg>              <path d="M0,175 L0,0 L350,0 L350,350 L175,350"
+                    fill="none" stroke="#11114f" stroke-width="9" stroke-linecap="square"/>
+            
+            </svg>
+          </div>
+          <div class="brand-word">NEO DIGITAL</div>
+          <div class="brand-tagline">SMART CHOICE</div>
         </div>
-        <p>پیشرو در فناوری‌های ارتباطی نوین</p>
+
 
         <div class="bio-placeholder">
-          <strong>فروشگاه نیکتل</strong> جهت راحتی دسترسی شما عزیزان امکان خرید حضوری و آنلاین را فراهم کرده و با ارائه بالا ترین کیفیت و کم ترین قیمت پذیرای شما عزیزان هستیم. </br>
- جهت خرید و پشتیبانی از طریق درگاه های زیر اقدام فرمایید:
+          <strong>نئو دیجیتال</strong> جهت راحتی دسترسی شما عزیزان امکان خرید حضوری و آنلاین را فراهم کرده و با ارائه بالاترین کیفیت و کمترین قیمت پذیرای شما عزیزان هستیم.<br/>
+          جهت خرید و پشتیبانی از طریق درگاه‌های زیر اقدام فرمایید:
         </div>
       </div>
 
       <!-- دکمه‌های لینک -->
       <div class="links">
-        <a href="https://raya-tel.ir/" class="link-btn">لینک سایت</a>
-        <a href="https://www.instagram.com/niktell_mobile?igsh=b2YyejBtOG1vZXl0&utm_source=qr" class="link-btn">اینستاگرام</a>
-        <a href="https://whatsapp.com/channel/0029VazCVHi1CYoJ0fZFRT0D"
-          class="link-btn">کانال واتس اپ</a>
-        <a href="https://t.me/Niktell_mobile" class="link-btn">کانال تلگرام</a>
-        <a href="mailto:niktell.tech@gmail.com" class="link-btn">تماس از طریق ایمیل</a>
+        <a href="https://raya-tel.ir/" class="link-btn">
+          <span class="icon-badge"><img src="icons/10x/website.png" class="icon" alt=""/></span>
+          لینک سایت
+        </a>
+        <a href="https://www.instagram.com/neo.ghab?igsh=MTlvMzZ4MnJ3cDA2bA%3D%3D&utm_source=qr" class="link-btn">
+          <span class="icon-badge"><img src="icons/10x/instagram.png" class="icon" alt=""/></span>
+          اینستاگرام
+        </a>
+        <a href="https://whatsapp.com/channel/0029VazCVHi1CYoJ0fZFRT0D" class="link-btn">
+          <span class="icon-badge">
+            <svg class="icon" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.5 3.53 1.36 5L2 22l5.2-1.32C8.6 21.53 10.26 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.55 0-3-.42-4.26-1.15l-.3-.18-3.08.78.82-3-.2-.31A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.6c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-1.42-.71-2.35-1.27-3.28-2.88-.25-.43.25-.4.71-1.33.08-.16.04-.3-.04-.42-.08-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.55-.42-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.66 2.55 4.02 3.47 2.36.92 2.36.62 2.78.58.42-.04 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/>
+            </svg>
+          </span>
+          کانال واتس اپ
+        </a>
+        <a href="https://t.me/Neo_Digitall" class="link-btn">
+          <span class="icon-badge"><img src="icons/10x/telegram.png" class="icon" alt=""/></span>
+          کانال تلگرام
+        </a>
+        <a href="mailto:niktell.tech@gmail.com" class="link-btn">
+          <span class="icon-badge"><img src="icons/10x/email.png" class="icon" alt=""/></span>
+          تماس از طریق ایمیل
+        </a>
       </div>
     </div>
   </body>
